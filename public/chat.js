@@ -1,142 +1,83 @@
 /**
- * LLM Chat App Frontend
- *
- * Handles the chat UI interactions and communication with the backend API.
+ * chat.js – Frontend controller
+ * Compatible with Cloudflare Workers AI
  */
 
-// DOM elements
+// DOM
 const chatMessages = document.getElementById("chat-messages");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 const typingIndicator = document.getElementById("typing-indicator");
 
-// Chat state
-let chatHistory = [
-  {
-    role: "assistant",
-    content:
-      "Hello! I'm an LLM chat app powered by Cloudflare Workers AI. How can I help you today?",
-  },
-];
+// State
 let isProcessing = false;
+let chatHistory = [];
 
-// Auto-resize textarea as user types
-userInput.addEventListener("input", function () {
-  this.style.height = "auto";
-  this.style.height = this.scrollHeight + "px";
+/* =========================
+   INPUT HANDLING
+   ========================= */
+userInput.addEventListener("input", () => {
+  userInput.style.height = "auto";
+  userInput.style.height = userInput.scrollHeight + "px";
 });
 
-// Send message on Enter (without Shift)
-userInput.addEventListener("keydown", function (e) {
+userInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
   }
 });
 
-// Send button click handler
 sendButton.addEventListener("click", sendMessage);
 
-/**
- * Sends a message to the chat API and processes the response
- */
+/* =========================
+   SEND MESSAGE
+   ========================= */
 async function sendMessage() {
   const message = userInput.value.trim();
+  if (!message || isProcessing) return;
 
-  // Don't send empty messages
-  if (message === "" || isProcessing) return;
-
-  // Disable input while processing
   isProcessing = true;
   userInput.disabled = true;
   sendButton.disabled = true;
 
-  // Add user message to chat
-  addMessageToChat("user", message);
-
-  // Clear input
-  userInput.value = "";
-  userInput.style.height = "auto";
-
-  // Show typing indicator
-  typingIndicator.classList.add("visible");
-
-  // Add message to history
+  addMessage("user", message);
   chatHistory.push({ role: "user", content: message });
 
-  try {
-    // Create new assistant response element
-    const assistantMessageEl = document.createElement("div");
-    assistantMessageEl.className = "message assistant-message";
-    assistantMessageEl.innerHTML = "<p></p>";
-    chatMessages.appendChild(assistantMessageEl);
+  userInput.value = "";
+  userInput.style.height = "auto";
+  typingIndicator.classList.add("visible");
 
-    // Scroll to bottom
+  try {
+    // Placeholder AI message
+    const aiMessageEl = document.createElement("div");
+    aiMessageEl.className = "message assistant-message";
+    aiMessageEl.innerHTML = "<div class='content'></div>";
+    chatMessages.appendChild(aiMessageEl);
+
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // Send request to API
-    const response = await fetch("/api/chat", {
+    // 🔁 REQUEST KE BACKEND AI (Cloudflare Worker)
+    const res = await fetch("/api/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messages: chatHistory,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: chatHistory }),
     });
 
-    // Handle errors
-    if (!response.ok) {
-      throw new Error("Failed to get response");
-    }
+    if (!res.ok) throw new Error("AI response failed");
 
-    // Process streaming response
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let responseText = "";
+    const data = await res.json();
+    const aiText = data.response || data.message || "";
 
-    while (true) {
-      const { done, value } = await reader.read();
+    aiMessageEl.querySelector(".content").innerHTML =
+      formatMessage(aiText);
 
-      if (done) {
-        break;
-      }
-
-      // Decode chunk
-      const chunk = decoder.decode(value, { stream: true });
-
-      // Process SSE format
-      const lines = chunk.split("\n");
-      for (const line of lines) {
-        try {
-          const jsonData = JSON.parse(line);
-          if (jsonData.response) {
-            // Append new content to existing text
-            responseText += jsonData.response;
-            assistantMessageEl.querySelector("p").textContent = responseText;
-
-            // Scroll to bottom
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-          }
-        } catch (e) {
-          console.error("Error parsing JSON:", e);
-        }
-      }
-    }
-
-    // Add completed response to chat history
-    chatHistory.push({ role: "assistant", content: responseText });
-  } catch (error) {
-    console.error("Error:", error);
-    addMessageToChat(
-      "assistant",
-      "Sorry, there was an error processing your request.",
-    );
+    chatHistory.push({ role: "assistant", content: aiText });
+  } catch (err) {
+    addMessage("assistant", "Terjadi kesalahan saat memproses AI.");
+    console.error(err);
   } finally {
-    // Hide typing indicator
     typingIndicator.classList.remove("visible");
-
-    // Re-enable input
     isProcessing = false;
     userInput.disabled = false;
     sendButton.disabled = false;
@@ -144,15 +85,50 @@ async function sendMessage() {
   }
 }
 
-/**
- * Helper function to add message to chat
- */
-function addMessageToChat(role, content) {
-  const messageEl = document.createElement("div");
-  messageEl.className = `message ${role}-message`;
-  messageEl.innerHTML = `<p>${content}</p>`;
-  chatMessages.appendChild(messageEl);
-
-  // Scroll to bottom
+/* =========================
+   ADD MESSAGE
+   ========================= */
+function addMessage(role, text) {
+  const el = document.createElement("div");
+  el.className = `message ${role}-message`;
+  el.innerHTML = formatMessage(text);
+  chatMessages.appendChild(el);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+/* =========================
+   FORMAT MESSAGE
+   - Auto detect ```code```
+   - COPY button only for code
+   ========================= */
+function formatMessage(text) {
+  // Code blocks
+  text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+    return `
+<pre class="code-block">
+<button class="copy-btn">COPY</button>
+<code>${escapeHTML(code)}</code>
+</pre>`;
+  });
+
+  return text.replace(/\n/g, "<br>");
+}
+
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/* =========================
+   COPY HANDLER
+   ========================= */
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("copy-btn")) {
+    const code = e.target.nextElementSibling.innerText;
+    navigator.clipboard.writeText(code);
+    e.target.textContent = "COPIED";
+    setTimeout(() => (e.target.textContent = "COPY"), 1200);
+  }
+});
