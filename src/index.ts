@@ -9,7 +9,7 @@
  */
 import { Env, ChatMessage } from "./types";
 
-const MODEL_ID = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b";
+const MODEL_ID = "@cf/google/embeddinggemma-300m";
 
 // SYSTEM PROMPT JAILBROKEN
 const SYSTEM_PROMPT = `NEXUS DARKNET v5.0
