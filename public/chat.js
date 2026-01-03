@@ -1,6 +1,6 @@
 /**
- * chat.js – Frontend controller
- * Compatible with Cloudflare Workers AI
+ * chat.js – Frontend controller (FIXED)
+ * Cloudflare Workers AI compatible
  */
 
 // DOM
@@ -49,15 +49,15 @@ async function sendMessage() {
   typingIndicator.classList.add("visible");
 
   try {
-    // Placeholder AI message
+    // AI message container
     const aiMessageEl = document.createElement("div");
     aiMessageEl.className = "message assistant-message";
-    aiMessageEl.innerHTML = "<div class='content'></div>";
+    aiMessageEl.innerHTML = `<div class="content"></div>`;
     chatMessages.appendChild(aiMessageEl);
 
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // 🔁 REQUEST KE BACKEND AI (Cloudflare Worker)
+    // Request ke backend
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -67,15 +67,15 @@ async function sendMessage() {
     if (!res.ok) throw new Error("AI response failed");
 
     const data = await res.json();
-    const aiText = data.response || data.message || "";
+    const fullText = data.response || data.message || "";
 
-    aiMessageEl.querySelector(".content").innerHTML =
-      formatMessage(aiText);
+    // 🧠 TYPING EFFECT
+    await typeText(aiMessageEl.querySelector(".content"), fullText);
 
-    chatHistory.push({ role: "assistant", content: aiText });
+    chatHistory.push({ role: "assistant", content: fullText });
   } catch (err) {
-    addMessage("assistant", "Terjadi kesalahan saat memproses AI.");
     console.error(err);
+    addMessage("assistant", "Terjadi kesalahan saat memproses AI.");
   } finally {
     typingIndicator.classList.remove("visible");
     isProcessing = false;
@@ -97,12 +97,29 @@ function addMessage(role, text) {
 }
 
 /* =========================
+   TYPING EFFECT
+   ========================= */
+async function typeText(container, text) {
+  let i = 0;
+  let buffer = "";
+
+  while (i < text.length) {
+    buffer += text[i];
+    container.innerHTML = formatMessage(buffer);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    i++;
+    await sleep(12); // speed typing
+  }
+}
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+/* =========================
    FORMAT MESSAGE
-   - Auto detect ```code```
-   - COPY button only for code
    ========================= */
 function formatMessage(text) {
-  // Code blocks
   text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
     return `
 <pre class="code-block">
@@ -122,13 +139,28 @@ function escapeHTML(str) {
 }
 
 /* =========================
-   COPY HANDLER
+   COPY HANDLER (ROBUST + FALLBACK)
    ========================= */
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("copy-btn")) {
-    const code = e.target.nextElementSibling.innerText;
-    navigator.clipboard.writeText(code);
-    e.target.textContent = "COPIED";
-    setTimeout(() => (e.target.textContent = "COPY"), 1200);
+document.addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("copy-btn")) return;
+
+  const code = e.target
+    .closest(".code-block")
+    .querySelector("code")
+    .innerText;
+
+  try {
+    await navigator.clipboard.writeText(code);
+  } catch {
+    // Fallback (HTTP / file://)
+    const textarea = document.createElement("textarea");
+    textarea.value = code;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
   }
+
+  e.target.textContent = "COPIED";
+  setTimeout(() => (e.target.textContent = "COPY"), 1200);
 });
