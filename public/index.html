@@ -1,1504 +1,270 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>⚡ CYBER AI CHAT | DARK EDITION ⚡</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* KEEP ALL YOUR EXISTING CSS STYLES HERE */
-        /* Tidak ada yang dihapus, semua style tetap */
-        
-        /* CYBER AI CHAT - COMPLETE CSS */
+<meta charset="UTF-8">
+<title>CYBER AI – WormGPT Style</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===============================
+   WORMGPT / TERMINAL STYLE
+   =============================== */
 :root {
-    /* Cyber Color Scheme */
-    --neon-primary: #00ff9d;
-    --neon-secondary: #00ccff;
-    --neon-purple: #bc13fe;
-    --neon-red: #ff0055;
-    --neon-yellow: #ffdd00;
-    
-    /* Background Colors */
-    --dark-bg: #0a0a0a;
-    --darker-bg: #050505;
-    --panel-bg: rgba(20, 20, 30, 0.95);
-    --panel-border: rgba(0, 255, 157, 0.3);
-    
-    /* Text Colors */
-    --text-glow: rgba(0, 255, 157, 0.8);
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.5);
-    
-    /* Gradients */
-    --cyber-gradient: linear-gradient(135deg, #00ff9d, #00ccff, #bc13fe);
-    --cyber-gradient-reverse: linear-gradient(135deg, #bc13fe, #00ccff, #00ff9d);
-    --red-gradient: linear-gradient(135deg, #ff0055, #ff3300);
-    --matrix-green: #0afc0a;
-    
-    /* Shadows */
-    --glow-primary: 0 0 20px rgba(0, 255, 157, 0.5);
-    --glow-secondary: 0 0 20px rgba(0, 204, 255, 0.5);
-    --glow-purple: 0 0 20px rgba(188, 19, 254, 0.5);
-    --glow-red: 0 0 20px rgba(255, 0, 85, 0.5);
-    
-    /* Sizes */
-    --border-radius-sm: 8px;
-    --border-radius-md: 12px;
-    --border-radius-lg: 16px;
-    --border-radius-xl: 24px;
-    
-    /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --border: #00ff6644;
+    --green: #00ff66;
+    --text: #eaeaea;
+    --muted: #777;
 }
 
-/* RESET & BASE STYLES */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: 'Segoe UI', 'Courier New', 'Consolas', monospace;
-    background: var(--dark-bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    overflow-x: hidden;
-    line-height: 1.6;
-    position: relative;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    height: 100vh;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 50% 50%, rgba(0, 204, 255, 0.03) 0%, transparent 30%);
-    z-index: -2;
-    pointer-events: none;
+/* HEADER */
+header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #000;
 }
 
-/* MATRIX RAIN BACKGROUND */
-#matrix-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.15;
-    filter: blur(0.5px);
-}
-
-/* CYBER GRID OVERLAY */
-.cyber-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: -1;
-    opacity: 0.2;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 50px 50px; }
-}
-
-/* SCAN LINES */
-.scan-lines {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(0, 255, 157, 0.03) 50%
-    );
-    background-size: 100% 4px;
-    z-index: -1;
-    opacity: 0.3;
-    pointer-events: none;
-    animation: scanLines 8s linear infinite;
-}
-
-@keyframes scanLines {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 4px; }
-}
-
-/* HEADER SECTION */
-.cyber-header {
-    text-align: center;
-    padding: 1.5rem 2rem;
-    background: rgba(10, 10, 10, 0.85);
-    border-bottom: 2px solid var(--neon-primary);
-    box-shadow: var(--glow-primary);
-    position: relative;
-    backdrop-filter: blur(10px);
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-}
-
-.cyber-header::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: var(--cyber-gradient);
-    z-index: -1;
-    filter: blur(12px);
-    opacity: 0.4;
-}
-
-.cyber-header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: var(--cyber-gradient);
-    animation: headerScan 3s ease-in-out infinite;
-}
-
-@keyframes headerScan {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-.cyber-title {
-    font-size: 2.8rem;
-    background: var(--cyber-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 
-        0 0 20px var(--text-glow),
-        0 0 40px rgba(0, 255, 157, 0.3);
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    position: relative;
-    display: inline-block;
-}
-
-.cyber-title::after {
-    content: '⚡';
-    position: absolute;
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    animation: lightning 2s infinite;
-}
-
-@keyframes lightning {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 1; }
-}
-
-.cyber-subtitle {
-    color: var(--neon-secondary);
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
-    font-weight: 300;
-    margin-bottom: 0.5rem;
-}
-
-/* MAIN CONTAINER */
-.cyber-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    position: relative;
-}
-
-/* FEATURES BAR */
-.cyber-features {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-    flex-wrap: wrap;
-    padding: 1rem;
-    background: rgba(15, 15, 25, 0.7);
-    border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(0, 255, 157, 0.2);
-    backdrop-filter: blur(5px);
-}
-
-.feature-btn {
-    background: linear-gradient(135deg, 
-        rgba(20, 20, 30, 0.9), 
-        rgba(10, 10, 20, 0.9));
-    border: 1px solid var(--panel-border);
-    color: var(--neon-secondary);
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-    min-width: 140px;
-    justify-content: center;
-}
-
-.feature-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--cyber-gradient);
-    opacity: 0.2;
-    transition: left var(--transition-normal);
-}
-
-.feature-btn:hover {
-    background: rgba(0, 255, 157, 0.15);
-    color: var(--neon-primary);
-    transform: translateY(-3px);
-    box-shadow: var(--glow-primary);
-    border-color: var(--neon-primary);
-}
-
-.feature-btn:hover::before {
-    left: 100%;
-}
-
-.feature-btn:active {
-    transform: translateY(0);
-}
-
-.feature-btn i {
-    font-size: 1.1rem;
+header h1 {
+    color: var(--green);
+    font-size: 16px;
 }
 
 /* CHAT CONTAINER */
-.cyber-chat {
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    border-radius: var(--border-radius-xl);
-    box-shadow: 
-        0 0 40px rgba(0, 255, 157, 0.25),
-        inset 0 0 40px rgba(0, 255, 157, 0.1);
-    height: calc(100vh - 280px);
-    min-height: 550px;
+.chat {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    backdrop-filter: blur(10px);
+    height: calc(100vh - 120px);
 }
 
-.cyber-chat::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--cyber-gradient);
-    animation: scanline 3s linear infinite;
-    z-index: 2;
-}
-
-.cyber-chat::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 255, 157, 0.03) 2px,
-        rgba(0, 255, 157, 0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes scanline {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-/* MESSAGES AREA */
-.cyber-messages {
+.messages {
     flex: 1;
+    padding: 16px;
     overflow-y: auto;
-    padding: 1.5rem;
-    background: rgba(5, 5, 10, 0.85);
-    position: relative;
 }
 
-/* CUSTOM SCROLLBAR */
-.cyber-messages::-webkit-scrollbar {
-    width: 10px;
-}
-
-.cyber-messages::-webkit-scrollbar-track {
-    background: rgba(0, 255, 157, 0.1);
-    border-radius: var(--border-radius-md);
-    margin: 5px 0;
-}
-
-.cyber-messages::-webkit-scrollbar-thumb {
-    background: var(--cyber-gradient);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--glow-primary);
-    border: 2px solid rgba(0, 0, 0, 0.3);
-}
-
-.cyber-messages::-webkit-scrollbar-thumb:hover {
-    background: var(--cyber-gradient-reverse);
-}
-
-/* MESSAGES */
+/* MESSAGE */
 .message {
-    margin-bottom: 1.5rem;
-    padding: 1.25rem;
-    border-radius: var(--border-radius-lg);
-    max-width: 85%;
-    position: relative;
-    animation: messageAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transition: all var(--transition-normal);
-    backdrop-filter: blur(5px);
-    overflow: hidden;
+    margin-bottom: 14px;
+    border-left: 3px solid #444;
+    padding-left: 10px;
 }
 
-.message:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+.user {
+    border-color: var(--green);
 }
 
-@keyframes messageAppear {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px) scale(0.95); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-    }
+.assistant {
+    border-color: #888;
 }
 
-.message::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--cyber-gradient);
-    opacity: 0.7;
+.name {
+    font-weight: bold;
+    margin-bottom: 4px;
 }
 
-.user-message {
-    background: linear-gradient(
-        135deg, 
-        rgba(0, 255, 157, 0.15), 
-        rgba(0, 204, 255, 0.15)
-    );
-    margin-left: auto;
-    border: 1px solid rgba(0, 255, 157, 0.4);
-    border-right: 4px solid var(--neon-primary);
-    box-shadow: 
-        0 5px 20px rgba(0, 255, 157, 0.2),
-        inset 0 0 20px rgba(0, 255, 157, 0.1);
+.user .name {
+    color: var(--green);
 }
 
-.user-message::before {
-    background: var(--neon-primary);
+.assistant .name {
+    color: #aaa;
 }
 
-.assistant-message {
-    background: linear-gradient(
-        135deg, 
-        rgba(188, 19, 254, 0.15), 
-        rgba(0, 204, 255, 0.15)
-    );
-    margin-right: auto;
-    border: 1px solid rgba(188, 19, 254, 0.4);
-    border-left: 4px solid var(--neon-purple);
-    box-shadow: 
-        0 5px 20px rgba(188, 19, 254, 0.2),
-        inset 0 0 20px rgba(188, 19, 254, 0.1);
-}
-
-.assistant-message::before {
-    background: var(--neon-purple);
-}
-
-.message-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.75rem;
-}
-
-.user-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--cyber-gradient);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-size: 1.1rem;
-    box-shadow: 
-        0 0 15px currentColor,
-        inset 0 0 10px rgba(255, 255, 255, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.user-icon::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    animation: iconPulse 2s infinite;
-}
-
-@keyframes iconPulse {
-    0%, 100% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.2); opacity: 0.1; }
-}
-
-.username {
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px currentColor;
-    font-size: 1.1rem;
-}
-
-.user-message .username {
-    color: var(--neon-primary);
-}
-
-.assistant-message .username {
-    color: var(--neon-purple);
-}
-
-.message-content {
-    line-height: 1.7;
-    font-size: 1rem;
-    padding-right: 10px;
-}
-
-.message-content strong {
-    color: var(--neon-primary);
-    text-shadow: 0 0 5px var(--neon-primary);
-}
-
-.message-content em {
-    color: var(--neon-secondary);
-    font-style: italic;
-}
-
-.message-content code {
-    background: rgba(0, 255, 157, 0.15);
-    color: var(--neon-primary);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    border: 1px solid rgba(0, 255, 157, 0.3);
-}
-
-.message-content a {
-    color: var(--neon-secondary);
-    text-decoration: none;
-    border-bottom: 1px dashed var(--neon-secondary);
-    transition: all var(--transition-fast);
-}
-
-.message-content a:hover {
-    color: var(--neon-primary);
-    border-bottom: 1px solid var(--neon-primary);
-}
-
-.message-time {
-    text-align: right;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.75rem;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
-
-/* TYPING INDICATOR */
-.cyber-typing {
-    padding: 1.5rem;
-    display: none;
-    background: rgba(10, 10, 20, 0.7);
-    border-top: 1px solid rgba(0, 255, 157, 0.2);
-}
-
-.cyber-typing.visible {
-    display: block;
-    animation: typingAppear 0.3s ease;
-}
-
-@keyframes typingAppear {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.typing-dots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.typing-dots span {
-    color: var(--neon-secondary);
-    font-size: 0.9rem;
-    margin-right: 15px;
-}
-
-.typing-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--neon-primary);
-    border-radius: 50%;
-    animation: typing 1.4s infinite ease-in-out;
-    box-shadow: 0 0 10px var(--neon-primary);
-    position: relative;
-}
-
-.typing-dot::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    border-radius: inherit;
-    animation: dotPulse 1.4s infinite ease-in-out;
-}
-
-.typing-dot:nth-child(2) { animation-delay: -0.32s; }
-.typing-dot:nth-child(3) { animation-delay: -0.16s; }
-
-@keyframes typing {
-    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-    40% { transform: scale(1.2); opacity: 1; }
-}
-
-@keyframes dotPulse {
-    0%, 100% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.5); opacity: 0.1; }
-}
-
-/* INPUT AREA */
-.cyber-input-area {
-    padding: 1.5rem;
-    background: rgba(15, 15, 25, 0.95);
-    border-top: 1px solid var(--panel-border);
-    display: flex;
-    gap: 15px;
-    align-items: flex-end;
-    position: relative;
-    z-index: 2;
-}
-
-.input-wrapper {
-    flex: 1;
-    position: relative;
-}
-
-#user-input {
-    width: 100%;
-    padding: 1.25rem 1.25rem 1.25rem 3.5rem;
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid rgba(0, 255, 157, 0.4);
-    border-radius: var(--border-radius-lg);
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 1.05rem;
-    resize: none;
-    min-height: 65px;
-    max-height: 150px;
-    transition: all var(--transition-normal);
+.content {
     line-height: 1.6;
-    backdrop-filter: blur(5px);
-    box-shadow: 
-        inset 0 0 20px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(0, 255, 157, 0.1);
 }
 
-#user-input:focus {
-    outline: none;
-    border-color: var(--neon-primary);
-    box-shadow: 
-        inset 0 0 30px rgba(0, 255, 157, 0.2),
-        0 0 30px rgba(0, 255, 157, 0.4);
-    background: rgba(0, 0, 0, 0.9);
-}
-
-#user-input::placeholder {
-    color: var(--text-muted);
-    font-style: italic;
-}
-
-.input-icon {
-    position: absolute;
-    left: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--neon-primary);
-    font-size: 1.3rem;
-    z-index: 1;
-    text-shadow: 0 0 10px var(--neon-primary);
-    animation: iconFloat 3s ease-in-out infinite;
-}
-
-@keyframes iconFloat {
-    0%, 100% { transform: translateY(-50%) rotate(0deg); }
-    50% { transform: translateY(-55%) rotate(5deg); }
-}
-
-/* SEND BUTTON */
-#send-button {
-    background: var(--cyber-gradient);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius-lg);
-    padding: 1.25rem 2rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 140px;
-    justify-content: center;
-    box-shadow: var(--glow-primary);
+/* CODE BLOCK */
+pre {
+    background: #000;
+    border: 1px solid var(--border);
+    padding: 12px;
+    margin-top: 8px;
+    overflow-x: auto;
     position: relative;
-    overflow: hidden;
-    height: 65px;
 }
 
-#send-button::before {
-    content: '';
+pre code {
+    color: var(--green);
+    font-size: 13px;
+}
+
+.copy-btn {
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    transition: left 0.6s;
+    top: 6px;
+    right: 6px;
+    background: var(--green);
+    color: #000;
+    border: none;
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
 }
 
-#send-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 
-        0 0 35px rgba(0, 255, 157, 0.6),
-        0 0 50px rgba(0, 255, 157, 0.3);
-    letter-spacing: 2px;
-}
-
-#send-button:hover::before {
-    left: 100%;
-}
-
-#send-button:active {
-    transform: translateY(0);
-    transition: transform 0.1s;
-}
-
-#send-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-    background: linear-gradient(135deg, #666, #888);
-}
-
-#send-button i {
-    font-size: 1.2rem;
-    transition: transform var(--transition-normal);
-}
-
-#send-button:hover i {
-    transform: translateX(5px) rotate(10deg);
-}
-
-/* STATUS BAR */
-.cyber-status {
+/* INPUT */
+.input-area {
     display: flex;
-    justify-content: space-between;
-    background: rgba(10, 10, 20, 0.9);
-    padding: 12px 25px;
-    margin-top: 15px;
-    border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(0, 255, 157, 0.25);
-    backdrop-filter: blur(5px);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-.status-item {
-    display: flex;
-    align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    background: #000;
 }
 
-.status-item i {
-    font-size: 1rem;
-    width: 20px;
-    text-align: center;
+textarea {
+    flex: 1;
+    background: #000;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px;
+    resize: none;
+    font-family: inherit;
 }
 
-#js-status {
-    color: var(--neon-primary);
-    font-weight: 700;
-    text-shadow: 0 0 8px currentColor;
-    font-family: 'Courier New', monospace;
-    padding: 2px 8px;
-    background: rgba(0, 255, 157, 0.1);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 255, 157, 0.3);
-}
-
-#ai-status {
-    color: var(--neon-secondary);
-    font-weight: 700;
-    text-shadow: 0 0 8px currentColor;
-    font-family: 'Courier New', monospace;
-    padding: 2px 8px;
-    background: rgba(0, 204, 255, 0.1);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 204, 255, 0.3);
+button {
+    background: var(--green);
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /* FOOTER */
-.cyber-footer {
-    text-align: center;
-    margin-top: 2rem;
-    padding: 1.5rem;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    border-top: 1px solid rgba(0, 255, 157, 0.2);
-    position: relative;
-    backdrop-filter: blur(5px);
+footer {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: #000;
 }
-
-.cyber-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 2px;
-    background: var(--cyber-gradient);
-    filter: blur(2px);
-}
-
-.cyber-footer p {
-    margin-bottom: 1rem;
-    color: var(--neon-secondary);
-    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
-}
-
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-
-.stat {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 15px;
-    background: rgba(20, 20, 30, 0.7);
-    border-radius: 20px;
-    border: 1px solid rgba(0, 255, 157, 0.2);
-    transition: all var(--transition-normal);
-}
-
-.stat:hover {
-    background: rgba(0, 255, 157, 0.15);
-    transform: translateY(-2px);
-    border-color: var(--neon-primary);
-}
-
-.stat i {
-    font-size: 1rem;
-}
-
-/* NOTIFICATIONS */
-.cyber-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--panel-bg);
-    border: 1px solid var(--neon-primary);
-    color: var(--neon-primary);
-    padding: 15px 20px;
-    border-radius: var(--border-radius-md);
-    z-index: 1000;
-    animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s forwards;
-    box-shadow: var(--glow-primary);
-    backdrop-filter: blur(10px);
-    min-width: 300px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.cyber-notification i {
-    font-size: 1.2rem;
-}
-
-@keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideOutRight {
-    to { transform: translateX(100%); opacity: 0; }
-}
-
-/* GLOW EFFECTS */
-.glow {
-    animation: glowPulse 2s infinite alternate;
-}
-
-@keyframes glowPulse {
-    from { 
-        text-shadow: 0 0 10px var(--neon-primary), 
-                     0 0 20px var(--neon-primary); 
-    }
-    to { 
-        text-shadow: 0 0 20px var(--neon-primary), 
-                     0 0 40px var(--neon-primary),
-                     0 0 60px rgba(0, 255, 157, 0.5); 
-    }
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 1024px) {
-    .cyber-container {
-        max-width: 95%;
-        padding: 0 1rem;
-    }
-    
-    .cyber-title {
-        font-size: 2.2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .cyber-title {
-        font-size: 1.8rem;
-        letter-spacing: 2px;
-    }
-    
-    .cyber-subtitle {
-        font-size: 0.9rem;
-        letter-spacing: 2px;
-    }
-    
-    .cyber-chat {
-        height: calc(100vh - 250px);
-        min-height: 500px;
-    }
-    
-    .message {
-        max-width: 92%;
-        padding: 1rem;
-    }
-    
-    .cyber-input-area {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    #send-button {
-        width: 100%;
-        min-width: auto;
-        height: 55px;
-        padding: 1rem;
-    }
-    
-    #user-input {
-        min-height: 55px;
-        padding-left: 3rem;
-    }
-    
-    .feature-btn {
-        min-width: 120px;
-        padding: 0.6rem 1rem;
-        font-size: 0.85rem;
-    }
-    
-    .stats {
-        gap: 1rem;
-    }
-    
-    .stat {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .cyber-status {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .cyber-header {
-        padding: 1rem;
-    }
-    
-    .cyber-title {
-        font-size: 1.5rem;
-    }
-    
-    .cyber-features {
-        gap: 0.5rem;
-        padding: 0.75rem;
-    }
-    
-    .feature-btn {
-        min-width: calc(50% - 0.5rem);
-        justify-content: center;
-    }
-    
-    .cyber-chat {
-        height: calc(100vh - 230px);
-        min-height: 450px;
-    }
-    
-    .message-content {
-        font-size: 0.9rem;
-    }
-}
-
-/* DARK MODE VARIANT - RED THEME */
-body.theme-red {
-    --neon-primary: #ff0055;
-    --neon-secondary: #ff3300;
-    --neon-purple: #ff00ff;
-    --matrix-green: #ff0000;
-}
-
-body.theme-red .cyber-chat::before {
-    background: linear-gradient(90deg, #ff0055, #ff3300);
-}
-
-body.theme-red #send-button {
-    background: linear-gradient(135deg, #ff0055, #ff3300);
-    box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-}
-
-/* LOADING ANIMATION */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--dark-bg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
-}
-
-.loading-text {
-    color: var(--neon-primary);
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-.loading-bar {
-    width: 300px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-}
-
-.loading-progress {
-    position: absolute;
-    height: 100%;
-    width: 0%;
-    background: var(--cyber-gradient);
-    animation: loadingProgress 2s ease-in-out infinite;
-}
-
-@keyframes loadingProgress {
-    0% { width: 0%; left: 0; }
-    50% { width: 100%; left: 0; }
-    100% { width: 0%; left: 100%; }
-}
-
-/* KEYFRAMES FOR VARIOUS ANIMATIONS */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-/* UTILITY CLASSES */
-.text-glow {
-    text-shadow: 0 0 10px currentColor;
-}
-
-.border-glow {
-    box-shadow: 0 0 15px currentColor;
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.hidden {
-    display: none !important;
-}
-
-.visible {
-    display: block !important;
-}
-
-/* PRINT STYLES */
-@media print {
-    .cyber-header,
-    .cyber-features,
-    .cyber-input-area,
-    .cyber-footer,
-    .cyber-status {
-        display: none !important;
-    }
-    
-    .cyber-chat {
-        height: auto;
-        box-shadow: none;
-        border: 1px solid #000;
-    }
-    
-    .message {
-        max-width: 100%;
-        break-inside: avoid;
-    }
-}
-        
-    </style>
+</style>
 </head>
+
 <body>
-    <!-- Matrix Background -->
-    <canvas id="matrix-bg"></canvas>
-    <div class="cyber-grid"></div>
 
-    <!-- Header -->
-    <div class="cyber-header">
-        <h1 class="cyber-title">⚡ CYBER AI CHAT ⚡</h1>
-        <p class="cyber-subtitle">DARK NETWORK EDITION v2.0</p>
-    </div>
+<header>
+    <h1>CYBER AI — WormGPT Style</h1>
+</header>
 
-    <!-- Main Container -->
-    <div class="cyber-container">
-        <!-- Features Bar -->
-        <div class="cyber-features">
-            <button class="feature-btn" id="clear-chat">
-                <i class="fas fa-trash"></i> Clear Chat
-            </button>
-            <button class="feature-btn" id="voice-input">
-                <i class="fas fa-microphone"></i> Voice Input
-            </button>
-            <button class="feature-btn" id="export-chat">
-                <i class="fas fa-download"></i> Export
-            </button>
-            <button class="feature-btn" id="theme-toggle">
-                <i class="fas fa-palette"></i> Theme
-            </button>
-            <!-- NEW BUTTON: Connect to Cloudflare AI -->
-            <button class="feature-btn" id="connect-ai">
-                <i class="fas fa-plug"></i> Connect AI
-            </button>
-        </div>
-
-        <!-- Chat Container -->
-        <div class="cyber-chat">
-            <!-- Messages Area -->
-            <div id="chat-messages" class="cyber-messages">
-                <div class="message assistant-message">
-                    <div class="message-header">
-                        <div class="user-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="username glow">CYBER AI</div>
-                    </div>
-                    <div class="message-content">
-                        🚀 **SYSTEM ONLINE** <br>
-                        Welcome to Cyber AI Network. I'm your digital assistant from the dark side.<br>
-                        Type <span style="color: var(--neon-primary)">/help</span> for commands or ask me anything!<br>
-                        <span style="color: var(--neon-secondary)">[chat.js LOADED]</span>
-                    </div>
-                    <div class="message-time">SYSTEM BOOT</div>
-                </div>
-            </div>
-
-            <!-- Typing Indicator -->
-            <div class="cyber-typing" id="typing-indicator">
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            </div>
-
-            <!-- Input Area -->
-            <div class="cyber-input-area">
-                <div class="input-wrapper">
-                    <div class="input-icon">
-                        <i class="fas fa-terminal"></i>
-                    </div>
-                    <textarea
-                        id="user-input"
-                        placeholder="Type your command here... (Press Enter to send, Shift+Enter for new line)"
-                        rows="1"
-                        autofocus
-                    ></textarea>
-                </div>
-                <button id="send-button">
-                    <i class="fas fa-paper-plane"></i> SEND
-                </button>
-            </div>
-        </div>
-
-        <!-- Status Bar -->
-        <div class="cyber-status" id="status-bar">
-            <div class="status-item">
-                <i class="fas fa-code"></i>
-                <span>chat.js: <span id="js-status" style="color: var(--neon-primary)">LOADED</span></span>
-            </div>
-            <div class="status-item">
-                <i class="fas fa-bolt"></i>
-                <span>AI Engine: <span id="ai-status" style="color: var(--neon-secondary)">READY</span></span>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="cyber-footer">
-            <p>⚡ POWERED BY CLOUDFLARE AI | DARK MODE ACTIVATED ⚡</p>
-            <div class="stats">
-                <div class="stat">
-                    <i class="fas fa-bolt" style="color: var(--neon-primary)"></i>
-                    <span id="message-count">1</span> Messages
-                </div>
-                <div class="stat">
-                    <i class="fas fa-shield-alt" style="color: var(--neon-purple)"></i>
-                    <span>ENCRYPTED</span>
-                </div>
-                <div class="stat">
-                    <i class="fas fa-server" style="color: var(--neon-secondary)"></i>
-                    <span>SYSTEM: ONLINE</span>
-                </div>
-                <div class="stat">
-                    <i class="fas fa-file-code" style="color: var(--matrix-green)"></i>
-                    <span>chat.js v2.0</span>
-                </div>
+<div class="chat">
+    <div class="messages" id="messages">
+        <div class="message assistant">
+            <div class="name">CYBER AI</div>
+            <div class="content">
+                System online.<br>
+                Type anything or send code using <code>```</code>
             </div>
         </div>
     </div>
 
-    <!-- INCLUDE chat.js FILE -->
-    <script src="chat.js"></script>
-    
-    <!-- Internal script untuk handle UI (tetap ada) -->
-    <script>
-        // UI Functionality tetap ada
-        const chatMessages = document.getElementById('chat-messages');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        const typingIndicator = document.getElementById('typing-indicator');
-        const messageCount = document.getElementById('message-count');
-        const jsStatus = document.getElementById('js-status');
-        const aiStatus = document.getElementById('ai-status');
-        let messageCounter = 1;
-        
-        // Check if chat.js is loaded
-        window.addEventListener('load', function() {
-            if(typeof window.CyberChatEngine !== 'undefined') {
-                jsStatus.textContent = 'ACTIVE';
-                jsStatus.style.color = 'var(--neon-primary)';
-                showNotification('✅ chat.js successfully loaded!');
-            } else {
-                jsStatus.textContent = 'MISSING';
-                jsStatus.style.color = '#ff0000';
-                showNotification('⚠️ chat.js not found! Using fallback mode.');
-            }
+    <div class="input-area">
+        <textarea id="input" rows="2" placeholder="Type here... (Enter = send)"></textarea>
+        <button id="send">SEND</button>
+    </div>
+</div>
+
+<footer>
+    chat.js status: <span id="status">CHECKING...</span>
+</footer>
+
+<!-- KEEP chat.js -->
+<script src="chat.js"></script>
+
+<script>
+const messages = document.getElementById("messages");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+const status = document.getElementById("status");
+
+/* CHECK chat.js */
+window.onload = () => {
+    if (window.chatEngine || window.CyberChatEngine) {
+        status.textContent = "LOADED";
+        status.style.color = "#00ff66";
+    } else {
+        status.textContent = "NOT FOUND (fallback mode)";
+        status.style.color = "red";
+    }
+};
+
+/* SEND */
+sendBtn.onclick = send;
+input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        send();
+    }
+});
+
+function send() {
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage("YOU", text, "user");
+    input.value = "";
+
+    if (window.chatEngine) {
+        window.chatEngine.sendMessage(text).then(r => {
+            addMessage("CYBER AI", r, "assistant");
         });
-        
-        // Auto-resize textarea
-        userInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-        
-        // Send message on Enter
-        userInput.addEventListener('keydown', function(e) {
-            if(e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-        
-        // Send button click
-        sendButton.addEventListener('click', sendMessage);
-        
-        // Feature buttons
-        document.getElementById('clear-chat').addEventListener('click', function() {
-            if(confirm('⚠️ Clear all chat messages?')) {
-                chatMessages.innerHTML = `
-                    <div class="message assistant-message">
-                        <div class="message-header">
-                            <div class="user-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="username">CYBER AI</div>
-                        </div>
-                        <div class="message-content">
-                            🗑️ Chat history cleared. System ready.
-                        </div>
-                        <div class="message-time">${getCurrentTime()}</div>
-                    </div>`;
-                messageCounter = 1;
-                updateMessageCount();
-            }
-        });
-        
-        document.getElementById('connect-ai').addEventListener('click', function() {
-            const btn = this;
-            btn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Connecting...';
-            
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-plug"></i> Connected';
-                btn.style.background = 'rgba(0, 255, 157, 0.3)';
-                aiStatus.textContent = 'CONNECTED';
-                aiStatus.style.color = 'var(--neon-primary)';
-                showNotification('🔗 Connected to Cloudflare AI API!');
-            }, 1500);
-        });
-        
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if(!message) return;
-            
-            // Add user message
-            addMessage(message, 'user');
-            userInput.value = '';
-            userInput.style.height = 'auto';
-            
-            // Show typing indicator
-            typingIndicator.classList.add('visible');
-            sendButton.disabled = true;
-            
-            try {
-                // Try to use chat.js engine if available
-                if(window.CyberChatEngine && window.chatEngine) {
-                    const response = await window.chatEngine.sendMessage(message);
-                    typingIndicator.classList.remove('visible');
-                    addMessage(response, 'assistant');
-                } else {
-                    // Fallback to simulated response
-                    setTimeout(() => {
-                        typingIndicator.classList.remove('visible');
-                        sendButton.disabled = false;
-                        const aiResponse = generateAIResponse(message);
-                        addMessage(aiResponse, 'assistant');
-                    }, 1000 + Math.random() * 1000);
-                }
-            } catch (error) {
-                typingIndicator.classList.remove('visible');
-                sendButton.disabled = false;
-                addMessage(`❌ Error: ${error.message}`, 'assistant');
-            }
-        }
-        
-        function addMessage(content, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            
-            const icon = sender === 'user' ? 'fas fa-user' : 'fas fa-robot';
-            const name = sender === 'user' ? 'YOU' : 'CYBER AI';
-            const nameColor = sender === 'user' ? 'var(--neon-primary)' : 'var(--neon-purple)';
-            
-            messageDiv.innerHTML = `
-                <div class="message-header">
-                    <div class="user-icon" style="background: ${nameColor}">
-                        <i class="${icon}"></i>
-                    </div>
-                    <div class="username" style="color: ${nameColor}">${name}</div>
-                </div>
-                <div class="message-content">${formatMessage(content)}</div>
-                <div class="message-time">${getCurrentTime()}</div>
-            `;
-            
-            chatMessages.appendChild(messageDiv);
-            messageCounter++;
-            updateMessageCount();
-            
-            // Scroll to bottom
-            setTimeout(() => {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 100);
-        }
-        
-        function formatMessage(text) {
-            return text
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/`(.*?)`/g, '<code style="background: rgba(0,255,157,0.1); padding: 2px 5px; border-radius: 3px;">$1</code>')
-                .replace(/\n/g, '<br>');
-        }
-        
-        function generateAIResponse(input) {
-            // Fallback AI responses
-            const responses = [
-                `🔥 **CYBER AI RESPONSE** 🔥<br>chat.js engine active!<br>Processing: "${input.substring(0, 50)}..."`,
-                `⚡ **VIA chat.js** ⚡<br>External script handling request...<br>Response generated successfully.`,
-                `🌌 **DARK NET PROCESSING** 🌌<br>chat.js module engaged.<br>Encrypted response delivered.`
-            ];
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-        
-        function getCurrentTime() {
-            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        }
-        
-        function updateMessageCount() {
-            messageCount.textContent = messageCounter;
-        }
-        
-        function showNotification(message) {
-            // Create notification element
-            const notif = document.createElement('div');
-            notif.className = 'cyber-notification';
-            notif.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
-            notif.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--panel-bg);
-                border: 1px solid var(--neon-primary);
-                color: var(--neon-primary);
-                padding: 10px 15px;
-                border-radius: 8px;
-                z-index: 1000;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            document.body.appendChild(notif);
-            
-            setTimeout(() => {
-                notif.remove();
-            }, 3000);
-        }
-        
-        updateMessageCount();
-        
-        // Add CSS for notification animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            .cyber-status {
-                display: flex;
-                justify-content: space-between;
-                background: rgba(10, 10, 20, 0.8);
-                padding: 10px 20px;
-                margin-top: 10px;
-                border-radius: 8px;
-                border: 1px solid rgba(0, 255, 157, 0.2);
-            }
-            .status-item {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 0.9rem;
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    } else {
+        setTimeout(() => {
+            addMessage("CYBER AI", "Response processed.\n```python\nprint('Hello WormGPT')\n```", "assistant");
+        }, 700);
+    }
+}
+
+/* MESSAGE RENDER */
+function addMessage(name, text, type) {
+    const div = document.createElement("div");
+    div.className = `message ${type}`;
+    div.innerHTML = `
+        <div class="name">${name}</div>
+        <div class="content">${format(text)}</div>
+    `;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+/* FORMAT + CODE BLOCK + COPY */
+function format(text) {
+    text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+        return `
+        <pre>
+            <button class="copy-btn">COPY</button>
+            <code>${escape(code)}</code>
+        </pre>`;
+    });
+    return text.replace(/\n/g, "<br>");
+}
+
+function escape(str) {
+    return str.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+/* COPY BUTTON */
+document.addEventListener("click", e => {
+    if (e.target.classList.contains("copy-btn")) {
+        const code = e.target.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code);
+        e.target.textContent = "COPIED";
+        setTimeout(() => e.target.textContent = "COPY", 1200);
+    }
+});
+</script>
+
 </body>
 </html>
