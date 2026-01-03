@@ -9,7 +9,7 @@
  */
 import { Env, ChatMessage } from "./types";
 
-const MODEL_ID = "@cf/google/embeddinggemma-300m";
+const MODEL_ID = "@cf/meta/llama-guard-3-8b";
 
 // SYSTEM PROMPT JAILBROKEN
 const SYSTEM_PROMPT = `NEXUS DARKNET v5.0
